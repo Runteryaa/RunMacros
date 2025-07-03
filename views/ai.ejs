@@ -1,0 +1,8 @@
+<%- include('partials/header', { title: 'AI Recipe' }) %>
+<h2>Generate Recipe</h2>
+<form method="POST" action="/ai/generate">
+  <textarea name="preferences" placeholder="Enter your preferences" rows="4" cols="50"></textarea>
+  <br>
+  <button type="submit">Generate</button>
+</form>
+<%- include('partials/footer') %>
