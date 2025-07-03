@@ -1,0 +1,8 @@
+<%- include('header') %>
+<h1>Recipes</h1>
+<ul>
+    <% recipes.forEach(function(r){ %>
+        <li><pre><%= r %></pre></li>
+    <% }) %>
+</ul>
+<%- include('footer') %>
