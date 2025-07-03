@@ -4,10 +4,10 @@
 <script>
 const ctx = document.getElementById('calorieChart').getContext('2d');
 const data = {
-    labels: <%- JSON.stringify(meals.map(m => m.name)) %>,
+    labels: <%- JSON.stringify(Object.keys(totals)) %>,
     datasets: [{
         label: 'Calories',
-        data: <%- JSON.stringify(meals.map(m => m.calories)) %>,
+        data: <%- JSON.stringify(Object.values(totals)) %>,
         backgroundColor: 'rgba(75,192,192,0.2)',
         borderColor: 'rgba(75,192,192,1)',
         borderWidth: 1

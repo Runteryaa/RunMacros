@@ -1,14 +1,29 @@
 <%- include('header') %>
 <h1>Meals</h1>
-<ul>
-    <% meals.forEach(function(meal){ %>
-        <li><%= meal.name %> - <%= meal.calories %> kcal</li>
-    <% }) %>
-</ul>
+<% mealTimes.forEach(function(time){ %>
+    <h2><%= time %></h2>
+    <ul>
+        <% meals.filter(m => m.time === time).forEach(function(meal){ %>
+            <li><%= meal.name %> - <%= meal.calories %> kcal</li>
+        <% }) %>
+    </ul>
+<% }) %>
+
 <h2>Add Meal</h2>
 <form action="/meals/add" method="POST">
     <input type="text" name="name" placeholder="Meal name" required>
     <input type="number" name="calories" placeholder="Calories" required>
+    <select name="time">
+        <% mealTimes.forEach(function(time){ %>
+            <option value="<%= time %>"><%= time %></option>
+        <% }) %>
+    </select>
     <button type="submit">Add</button>
+</form>
+
+<h2>Add Meal Time</h2>
+<form action="/mealtimes/add" method="POST">
+    <input type="text" name="time" placeholder="New meal time" required>
+    <button type="submit">Add Time</button>
 </form>
 <%- include('footer') %>
