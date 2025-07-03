@@ -1,0 +1,12 @@
+<%- include('partials/header', { title: 'Meals' }) %>
+<h2>Your Meals</h2>
+<ul>
+  <% meals.forEach(function(meal, index){ %>
+    <li><%= meal.time %> - <%= meal.calories %> calories</li>
+  <% }); %>
+</ul>
+<form method="POST" action="/meals">
+  <input type="text" name="time" placeholder="New meal time" required>
+  <button type="submit">Add Meal Time</button>
+</form>
+<%- include('partials/footer') %>

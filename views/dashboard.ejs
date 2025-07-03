@@ -1,0 +1,18 @@
+<%- include('partials/header', { title: 'Dashboard' }) %>
+<h2>Total Calories: <%= totalCalories %></h2>
+<canvas id="calorieChart" width="400" height="200"></canvas>
+<script>
+  const ctx = document.getElementById('calorieChart');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: <%- JSON.stringify(meals.map(m => m.time)) %>,
+      datasets: [{
+        label: 'Calories',
+        data: <%- JSON.stringify(meals.map(m => m.calories)) %>,
+        backgroundColor: 'rgba(75, 192, 192, 0.6)'
+      }]
+    }
+  });
+</script>
+<%- include('partials/footer') %>

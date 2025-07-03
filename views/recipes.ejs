@@ -1,0 +1,11 @@
+<%- include('partials/header', { title: 'Recipes' }) %>
+<h2>Saved Recipes</h2>
+<ul>
+  <% recipes.forEach(function(r){ %>
+    <li>
+      <strong><%= r.name %></strong>
+      <p><%= r.instructions %></p>
+    </li>
+  <% }) %>
+</ul>
+<%- include('partials/footer') %>
