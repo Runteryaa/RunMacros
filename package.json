@@ -1,0 +1,26 @@
+{
+  "name": "runmacros",
+  "version": "1.0.0",
+  "description": "Macro and Calorie Tracker with AI recipes",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "calorie",
+    "tracker",
+    "ai",
+    "macros"
+  ],
+  "author": "Runterya",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.0.1",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "firebase-admin": "^13.4.0",
+    "i18n": "^0.15.1"
+  }
+}
