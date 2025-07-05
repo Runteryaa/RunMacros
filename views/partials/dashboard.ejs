@@ -1,0 +1,18 @@
+<div class="dashboard">
+  <canvas id="macroChart"></canvas>
+  <% const items = [
+    {key:'calories', title:'Calories', goal:2000},
+    {key:'protein', title:'Protein', goal:150},
+    {key:'carbs', title:'Carbs', goal:250},
+    {key:'fats', title:'Fats', goal:70}
+  ]; %>
+  <% items.forEach(function(item){ %>
+  <div class="macro-card gradient-<%= item.key %>" data-key="<%= item.key %>" data-goal="<%= item.goal %>" data-value="<%= macros[item.key] || 0 %>">
+    <header><%= item.title %></header>
+    <div class="macro-value">
+      <span class="val"><%= macros[item.key] || 0 %></span> / <span class="goal"><%= item.goal %></span>
+    </div>
+    <div class="progress"><div class="bar"></div></div>
+  </div>
+  <% }); %>
+</div>

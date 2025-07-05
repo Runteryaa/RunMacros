@@ -1,3 +1,153 @@
-body { font-family: Arial, sans-serif; margin: 20px; }
-nav a { margin-right: 10px; }
-pre { background: #f4f4f4; padding: 10px; }
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  margin:0;
+  background:linear-gradient(#fafafa,#e0e0e0);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+.bottom-nav{
+  display:flex;
+  gap:1rem;
+  background:linear-gradient(45deg,#333,#555);
+  padding:1rem;
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  justify-content:space-around;
+}
+.bottom-nav a{
+  color:#fff;
+  text-decoration:none;
+  padding:.5rem 1rem;
+}
+.bottom-nav a.active{
+  background:#2196f3;
+  border-radius:4px;
+}
+main{
+  padding:1rem;
+  padding-bottom:4rem;
+}
+.dashboard{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:1rem;
+}
+#macroChart{
+  grid-column:1/-1;
+  max-width:400px;
+  margin:0 auto 1rem;
+}
+.macro-card{
+  color:#fff;
+  padding:1rem;
+  border-radius:8px;
+  position:relative;
+  overflow:hidden;
+}
+.macro-card header{
+  font-size:1.2rem;
+  margin-bottom:.5rem;
+}
+.macro-value{
+  font-size:1.5rem;
+  margin-top:.5rem;
+}
+.progress{
+  background:rgba(255,255,255,0.3);
+  height:6px;
+  border-radius:3px;
+  margin-top:.5rem;
+  overflow:hidden;
+}
+.progress .bar{
+  width:100%;
+  height:100%;
+  background:#fff;
+  animation: progressIndeterminate 2s linear infinite;
+}
+@keyframes progressIndeterminate{
+  0%{transform:translateX(-100%);}100%{transform:translateX(100%);}
+}
+.gradient-calories{background:linear-gradient(45deg,#ff512f,#dd2476);}
+.gradient-protein{background:linear-gradient(45deg,#36d1dc,#5b86e5);}
+.gradient-carbs{background:linear-gradient(45deg,#f7971e,#ffd200);}
+.gradient-fats{background:linear-gradient(45deg,#c33764,#1d2671);}
+.meal-card{
+  background:#fff;
+  border-radius:8px;
+  padding:1rem;
+  margin-bottom:1rem;
+}
+.meal-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:.5rem;
+}
+.meal-header .icon{font-size:1.5rem;}
+.add-food{
+  background:linear-gradient(45deg,#1e90ff,#28a745);
+  border:none;
+  color:#fff;
+  padding:.3rem .8rem;
+  border-radius:4px;
+  cursor:pointer;
+}
+.placeholder{
+  text-align:center;
+  color:#888;
+  padding:1rem 0;
+}
+.recipes-tab .search-bar{
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  margin-bottom:1rem;
+}
+.pills .pill{
+  padding:.3rem .8rem;
+  border-radius:20px;
+  background:#eee;
+  cursor:pointer;
+  margin-right:.5rem;
+}
+.pills .pill.active{background:#333;color:#fff;}
+.recipe-card{
+  background:#fff;
+  border-radius:8px;
+  padding:1rem;
+  margin-bottom:1rem;
+}
+.recipe-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:.5rem;
+}
+.badge{
+  padding:.2rem .5rem;
+  border-radius:4px;
+  font-size:.8rem;
+  text-transform:capitalize;
+}
+.badge.easy{background:#28a745;color:#fff;}
+.badge.medium{background:#ffc107;color:#fff;}
+.badge.hard{background:#dc3545;color:#fff;}
+.meta, .macro-summary{
+  display:flex;
+  gap:1rem;
+  font-size:.9rem;
+  margin-bottom:.5rem;
+}
+.macro-summary span{font-weight:bold;}
+.tags{margin-bottom:.5rem;}
+.tag{
+  background:#eee;
+  border-radius:4px;
+  padding:.2rem .5rem;
+  margin-right:.3rem;
+  font-size:.8rem;
+}
