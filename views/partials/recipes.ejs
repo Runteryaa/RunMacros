@@ -1,0 +1,42 @@
+<div class="recipes-tab">
+  <div class="search-bar">
+    <input type="text" id="recipeSearch" placeholder="Search recipes...">
+    <div class="pills">
+      <span class="pill active" data-diff="all">All</span>
+      <span class="pill" data-diff="easy">Easy</span>
+      <span class="pill" data-diff="medium">Medium</span>
+      <span class="pill" data-diff="hard">Hard</span>
+    </div>
+  </div>
+  <div class="recipes-list">
+    <% recipes.forEach(function(r){ %>
+    <div class="recipe-card">
+      <div class="recipe-header">
+        <span class="title"><%= r.title %></span>
+        <span class="badge <%= r.difficulty %>"><%= r.difficulty %></span>
+      </div>
+      <p class="description"><%= r.description %></p>
+      <div class="meta">
+        <span>⏱ <%= r.prepTime %>m</span>
+        <span>🍽 <%= r.servings %></span>
+      </div>
+      <div class="macro-summary">
+        <span class="kcal"><%= r.kcal %> kcal</span>
+        <span class="protein"><%= r.protein %>g</span>
+        <span class="carbs"><%= r.carbs %>g</span>
+        <span class="fats"><%= r.fats %>g</span>
+      </div>
+      <div class="tags">
+        <% r.tags.forEach(function(tag){ %>
+        <span class="tag"><%= tag %></span>
+        <% }); %>
+      </div>
+      <ul class="ingredients">
+        <% r.ingredients.forEach(function(i){ %>
+        <li><%= i %></li>
+        <% }); %>
+      </ul>
+    </div>
+    <% }); %>
+  </div>
+</div>

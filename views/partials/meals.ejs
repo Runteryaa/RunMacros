@@ -1,0 +1,24 @@
+<div class="meals">
+  <% meals.forEach(function(meal, idx){ %>
+  <div class="meal-card">
+    <div class="meal-header">
+      <span class="icon">
+        <% if(meal.time==='breakfast'){ %>🍳<% } else if(meal.time==='lunch'){ %>🥪<% } else if(meal.time==='dinner'){ %>🍽️<% } else { %>🍎<% } %>
+      </span>
+      <span class="meal-name"><%= meal.name %></span>
+      <button class="add-food" data-index="<%= idx %>">Add Food</button>
+    </div>
+    <div class="meal-body">
+      <% if(!meal.items.length){ %>
+        <div class="placeholder">🛒 No foods added yet</div>
+      <% } else { %>
+        <ul>
+          <% meal.items.forEach(function(item){ %>
+            <li><%= item.name %></li>
+          <% }); %>
+        </ul>
+      <% } %>
+    </div>
+  </div>
+  <% }); %>
+</div>
