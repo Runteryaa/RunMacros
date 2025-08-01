@@ -1,4 +1,4 @@
-"use client";
+export const runtime = 'edge';
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { getDatabase, ref, get } from "firebase/database";
