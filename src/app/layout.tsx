@@ -17,6 +17,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9944004180654653"
+          crossOrigin="anonymous"
+        ></script>
+        </head>
       <body className="flex min-h-screen">
         < RouteLoader />
         < Sidebar />
