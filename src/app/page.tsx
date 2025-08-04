@@ -1,6 +1,10 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
+import dynamic from "next/dynamic";
+const AdBanner = dynamic(() => import("@/components/AdBanner"), { ssr: false });
+
 
 // If using Next.js App Router, put <Head> in your layout or below:
 import Head from "next/head";
@@ -8,6 +12,7 @@ import Head from "next/head";
 export default function HomePage() {
   return (
     <>
+
       {/* SEO & Social Meta */}
       <Head>
         <title>RunMacros: Effortless Macro & Calorie Tracking</title>
@@ -17,7 +22,7 @@ export default function HomePage() {
         />
         {/* AdSense verification tag could go here, if required */}
       </Head>
-
+<AdBanner />
       <main className="min-h-screen bg-white text-gray-800">
         {/* Hero Section */}
         <section className="text-center py-20 bg-gradient-to-b from-green-100 to-white">
@@ -43,7 +48,7 @@ export default function HomePage() {
   </p>
 </section>
 
-
+<AdBanner />
         {/* AdSense Slot - Top Banner */}
         <div className="flex justify-center my-8">
           {/* AdSense Code: Place your own <script> or <ins> here */}
@@ -52,7 +57,7 @@ export default function HomePage() {
 
           </div>
         </div>
-
+<AdBanner />
         {/* Features Section */}
         <section className="py-16 max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8 text-center">
           <div>
@@ -77,7 +82,7 @@ export default function HomePage() {
             </p>
           </div>
         </section>
-
+<AdBanner />
         {/* How It Works Section */}
         <section className="py-16 bg-gray-50 text-center">
           <h2 className="text-2xl font-bold mb-8">How It Works</h2>
@@ -99,7 +104,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-
+<AdBanner />
         <section className="py-16 max-w-4xl mx-auto px-6">
   <h2 className="text-2xl font-bold mb-4">Why Choose RunMacros?</h2>
   <p className="text-gray-700 mb-4">
@@ -110,14 +115,7 @@ export default function HomePage() {
   </p>
 </section>
 
-
-        {/* AdSense Slot - In Content */}
-        <div className="flex justify-center my-8">
-          <div className="w-full max-w-xl flex justify-center">
-
-          </div>
-        </div>
-
+<AdBanner />
         {/* Testimonials Section */}
         <section className="py-16 max-w-6xl mx-auto px-6">
           <h2 className="text-2xl font-bold text-center mb-10">What Users Are Saying</h2>
@@ -136,13 +134,13 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-<section className="py-16 max-w-4xl mx-auto px-6">
-  <h2 className="text-2xl font-bold mb-4">A Better Way to Eat Well</h2>
-  <p className="text-gray-700 mb-4">
-    We know that healthy living can feel overwhelming. That’s why RunMacros is designed to remove stress from eating well. Our app provides clear insights into your nutrition, encourages balanced meals, and celebrates your small wins along the way. Instead of restrictive diets, we focus on progress and learning. Every healthy choice counts, and we’re here to make each one easier.
-  </p>
-</section>
-
+        <section className="py-16 max-w-4xl mx-auto px-6">
+          <h2 className="text-2xl font-bold mb-4">A Better Way to Eat Well</h2>
+          <p className="text-gray-700 mb-4">
+            We know that healthy living can feel overwhelming. That’s why RunMacros is designed to remove stress from eating well. Our app provides clear insights into your nutrition, encourages balanced meals, and celebrates your small wins along the way. Instead of restrictive diets, we focus on progress and learning. Every healthy choice counts, and we’re here to make each one easier.
+          </p>
+        </section>
+<AdBanner />
         {/* FAQ Section */}
         <section className="py-16 bg-gray-50 max-w-4xl mx-auto px-6">
           <h2 className="text-2xl font-bold text-center mb-10">Frequently Asked Questions</h2>
@@ -165,14 +163,14 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-
-<section className="py-16 max-w-4xl mx-auto px-6">
-  <h2 className="text-2xl font-bold mb-4">Your Privacy Matters</h2>
-  <p className="text-gray-700 mb-4">
-    We understand that your health data is personal. That’s why RunMacros is committed to protecting your privacy. We do not sell or share your information with third parties, and all data is securely stored. Our privacy policy is transparent, and you’re always in control of your own account. If you have any questions or concerns, our team is here to help.
-  </p>
-</section>
-
+<AdBanner />
+        <section className="py-16 max-w-4xl mx-auto px-6">
+          <h2 className="text-2xl font-bold mb-4">Your Privacy Matters</h2>
+          <p className="text-gray-700 mb-4">
+            We understand that your health data is personal. That’s why RunMacros is committed to protecting your privacy. We do not sell or share your information with third parties, and all data is securely stored. Our privacy policy is transparent, and you’re always in control of your own account. If you have any questions or concerns, our team is here to help.
+          </p>
+        </section>
+<AdBanner />
         {/* Call to Action */}
         <section className="py-20 text-center bg-green-50">
           <h2 className="text-3xl font-bold mb-4">Ready to Reach Your Goals?</h2>
@@ -187,18 +185,18 @@ export default function HomePage() {
         {/* AdSense Slot - Footer */}
         <div className="flex justify-center my-8">
           <div className="w-full max-w-xl flex justify-center">
-
+<AdBanner />
           </div>
         </div>
 
-<section className="py-16 max-w-4xl mx-auto px-6">
-  <h2 className="text-2xl font-bold mb-4">Community & Support</h2>
-  <p className="text-gray-700 mb-4">
-    At RunMacros, you’re never alone on your journey. Join a supportive community of users who share tips, recipes, and motivation. Our platform offers regular updates, new features, and responsive customer support. Whether you need technical help or nutrition advice, we’re always here to guide you. Together, we can make healthy living a habit.
-  </p>
-</section>
+        <section className="py-16 max-w-4xl mx-auto px-6">
+          <h2 className="text-2xl font-bold mb-4">Community & Support</h2>
+          <p className="text-gray-700 mb-4">
+            At RunMacros, you’re never alone on your journey. Join a supportive community of users who share tips, recipes, and motivation. Our platform offers regular updates, new features, and responsive customer support. Whether you need technical help or nutrition advice, we’re always here to guide you. Together, we can make healthy living a habit.
+          </p>
+        </section>
 
-
+<AdBanner />
         {/* Footer */}
         <footer className="py-8 text-center text-sm text-gray-500">
           <Link href="/about" className="mx-2 hover:underline">About</Link> |
