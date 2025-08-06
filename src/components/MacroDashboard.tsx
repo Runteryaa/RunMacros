@@ -7,9 +7,9 @@ import MacroDonut from "@/components/MacroDonut";
 
 const MACROS = [
   { key: "calories", label: "Calories", color: "#2563eb", unit: "" },
-  { key: "carbs", label: "Carbs", color: "#facc15", unit: "g" },
+  { key: "carbs", label: "Carbs", color: "#f472b6", unit: "g" },
   { key: "protein", label: "Protein", color: "#22d3ee", unit: "g" },
-  { key: "fat", label: "Fat", color: "#f472b6", unit: "g" }
+  { key: "fat", label: "Fat", color: "#facc15", unit: "g" }
 ];
 
 export default function MacroDashboard() {
@@ -22,7 +22,6 @@ export default function MacroDashboard() {
     const unsub = onAuthStateChanged(auth, async (user) => {
       if (!user) return;
       const today = new Date().toISOString().slice(0, 10);
-      // Get all macros and goals
       const dayRef = ref(db, `users/${user.uid}/days/${today}`);
       const goalsRef = ref(db, `users/${user.uid}/goals`);
       const [daySnap, goalsSnap] = await Promise.all([get(dayRef), get(goalsRef)]);

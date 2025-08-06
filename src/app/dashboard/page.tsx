@@ -7,9 +7,6 @@ import MacroDashboard from "@/components/MacroDashboard";
 export default function DashboardPage() {
   const [user, setUser] = useState<User | null>(null);
 
-  const caloriesTaken = 1230;
-  const caloriesGoal = 2000;
-
   useEffect(() => {
     const auth = getAuth(app);
     const unsubscribe = onAuthStateChanged(auth, u => setUser(u));
