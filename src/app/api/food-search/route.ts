@@ -1,4 +1,6 @@
-export const dynamic = "force-dynamic"; // For hot reload/dev
+export const dynamic = "force-dynamic";
+export const runtime = 'edge';
+
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_FATSECRET_CLIENT_ID;
 const CLIENT_SECRET = process.env.NEXT_PUBLIC_FATSECRET_CLIENT_SECRET;
