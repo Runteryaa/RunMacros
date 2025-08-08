@@ -6,22 +6,10 @@ import dynamic from "next/dynamic";
 const AdBanner = dynamic(() => import("@/components/AdBanner"), { ssr: false });
 
 
-// If using Next.js App Router, put <Head> in your layout or below:
-import Head from "next/head";
-
 export default function HomePage() {
   return (
     <>
 
-      {/* SEO & Social Meta */}
-      <Head>
-        <title>RunMacros: Effortless Macro & Calorie Tracking</title>
-        <meta
-          name="description"
-          content="RunMacros makes macro and calorie tracking simple. Discover AI-powered meal plans, track nutrition, and reach your fitness goals. Start for free today!"
-        />
-        {/* AdSense verification tag could go here, if required */}
-      </Head>
 <AdBanner />
       <main className="min-h-screen bg-white text-gray-800">
         {/* Hero Section */}
@@ -61,22 +49,19 @@ export default function HomePage() {
         {/* Features Section */}
         <section className="py-16 max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8 text-center">
           <div>
-            <Image src="/meal.png" alt="Meal Planning illustration" width={120} height={120} className="mx-auto mb-4"/>
-            <h2 className="text-xl font-semibold">Meal Planning</h2>
+                        <h2 className="text-xl font-semibold">Meal Planning</h2>
             <p className="mt-2 text-gray-600">
               Organize your meals and get personalized macro insights for every day.
             </p>
           </div>
           <div>
-            <Image src="/ai-recipes.png" alt="AI-generated Recipes illustration" width={120} height={120} className="mx-auto mb-4"/>
-            <h2 className="text-xl font-semibold">AI-Powered Recipes</h2>
+                        <h2 className="text-xl font-semibold">AI-Powered Recipes</h2>
             <p className="mt-2 text-gray-600">
               Discover healthy recipes tailored to your nutrition needs.
             </p>
           </div>
           <div>
-            <Image src="/dashboard.png" alt="Progress Tracking illustration" width={120} height={120} className="mx-auto mb-4"/>
-            <h2 className="text-xl font-semibold">Track Progress</h2>
+                        <h2 className="text-xl font-semibold">Track Progress</h2>
             <p className="mt-2 text-gray-600">
               Monitor daily macros, calories, and progress towards your goals.
             </p>
