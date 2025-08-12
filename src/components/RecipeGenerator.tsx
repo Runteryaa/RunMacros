@@ -74,7 +74,7 @@ export default function RecipeGenerator() {
     }
 
     // Build exactly your DB shape
-    const recipeId = slugify(title) || `recipe-${Date.now()}`;
+    const recipeId = `r-${Date.now()}`;
     const data = {
       title: title.trim(),
       description: description.trim(),
@@ -159,7 +159,7 @@ export default function RecipeGenerator() {
         <table className="w-full text-sm border mb-3">
           <thead className="bg-gray-50">
             <tr>
-              <th className="text-left px-2 py-2">Name</th>
+              <th className="text-left px-2 py-2">Ingredient Name</th>
               <th className="text-left px-2 py-2">Amount</th>
               <th className="px-2 py-2">Calories</th>
               <th className="px-2 py-2">Carbs</th>
