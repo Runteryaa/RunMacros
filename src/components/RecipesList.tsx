@@ -43,6 +43,7 @@ export default function RecipeList() {
       list.sort((a, b) => (b.data.createdAt || 0) - (a.data.createdAt || 0));
       setRecipes(list);
       setLoading(false);
+      console.log(list)
     });
     return () => unsub();
   }, [user]);
@@ -62,16 +63,16 @@ export default function RecipeList() {
         <Link
           key={id}
           href={`/recipes/${id}`}
-          className="block rounded-xl border bg-white hover:shadow transition p-4"
+          className="block rounded-xl border bg-white hover:shadow transition p-4 card"
         >
           <div className="flex items-start justify-between gap-3">
             <h3 className="font-semibold text-lg">{data.title || "Untitled Recipe"}</h3>
-            <span className="text-xs px-2 py-0.5 rounded-full bg-gray-100">
-              {data.diet || "none"}
+            <span className="text-xs px-2 py-0.5 rounded-full ">
+              {data?.calories || "none"}
             </span>
           </div>
           <div className="text-sm text-gray-600 mt-1">
-            Servings: {data.servings ?? 1}
+            Macros: {data?.macros?.carbs || "x"}C, {data?.macros?.protein || "x"}P, {data?.macros?.fat || "x"}F
           </div>
           {data.nutritionPerServing && (
             <div className="mt-2 text-xs text-gray-700 grid grid-cols-4 gap-2">

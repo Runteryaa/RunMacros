@@ -29,6 +29,10 @@ body {
   border: 1px solid var(--border);
 }
 
+.btn {
+  cursor: pointer;
+}
+
 .muted { color: var(--muted); }
 
 .theme {

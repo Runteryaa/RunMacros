@@ -265,7 +265,7 @@ export default function SettingsPage() {
               type="number"
               min={100}
               max={250}
-              className="border rounded px-3 py-2 w-36"
+              className="border rounded px-3 py-2 w-36 card"
               required
             />
           </label>
@@ -279,7 +279,7 @@ export default function SettingsPage() {
               type="number"
               min={30}
               max={250}
-              className="border rounded px-3 py-2 w-36"
+              className="border rounded px-3 py-2 w-36 card"
               required
             />
           </label>
@@ -289,7 +289,7 @@ export default function SettingsPage() {
             <select
               value={settings.activity}
               onChange={e => setSettings(s => ({ ...s, activity: e.target.value as Settings["activity"] }))}
-              className="border rounded px-3 py-2"
+              className="border rounded px-3 py-2 card"
             >
               <option value="sedentary">Sedentary</option>
               <option value="light">Lightly active</option>
@@ -304,17 +304,16 @@ export default function SettingsPage() {
             <select
               value={settings.goalType}
               onChange={e => setSettings(s => ({ ...s, goalType: e.target.value as Settings["goalType"] }))}
-              className="border rounded px-3 py-2"
+              className="border rounded px-3 py-2 card"
             >
               <option value="lose">Lose weight</option>
               <option value="maintain">Maintain</option>
               <option value="gain">Gain weight</option>
             </select>
           </label>
-
           <button
             type="submit"
-            className="mt-2 px-6 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 transition font-semibold"
+            className="mt-2 px-6 py-2 rounded bg-blue-500 btn transition font-semibold"
           >
             Calculate Macros
           </button>
@@ -334,7 +333,7 @@ export default function SettingsPage() {
               max={10000}
               value={goals.calories}
               onChange={(e) => setGoals(g => ({ ...g, calories: e.target.value }))}
-              className="border rounded px-3 py-2"
+              className="border rounded px-3 py-2 card"
               required
             />
           </label>
@@ -347,7 +346,7 @@ export default function SettingsPage() {
               max={1000}
               value={goals.carbs}
               onChange={(e) => setGoals(g => ({ ...g, carbs: e.target.value }))}
-              className="border rounded px-3 py-2"
+              className="border rounded px-3 py-2 card"
               required
             />
           </label>
@@ -360,7 +359,7 @@ export default function SettingsPage() {
               max={1000}
               value={goals.protein}
               onChange={(e) => setGoals(g => ({ ...g, protein: e.target.value }))}
-              className="border rounded px-3 py-2"
+              className="border rounded px-3 py-2 card"
               required
             />
           </label>
@@ -373,7 +372,7 @@ export default function SettingsPage() {
               max={1000}
               value={goals.fat}
               onChange={(e) => setGoals(g => ({ ...g, fat: e.target.value }))}
-              className="border rounded px-3 py-2"
+              className="border rounded px-3 py-2 card"
               required
             />
           </label>
@@ -392,7 +391,7 @@ export default function SettingsPage() {
             {settings.mealCategories.map((cat, idx) => (
               <div key={idx} className="flex items-center gap-2">
                 <input
-                  className="border rounded px-3 py-2 flex-1"
+                  className="border rounded px-3 py-2 flex-1 card"
                   value={cat}
                   onChange={(e) => renameCategory(idx, e.target.value)}
                 />
@@ -400,19 +399,19 @@ export default function SettingsPage() {
                   <button
                     type="button"
                     onClick={() => moveCategory(idx, -1)}
-                    className="px-2 py-1 rounded bg-gray-200 hover:bg-gray-300"
+                    className="px-2 py-1 rounded card btn"
                     title="Move up"
                   >↑</button>
                   <button
                     type="button"
                     onClick={() => moveCategory(idx, 1)}
-                    className="px-2 py-1 rounded bg-gray-200 hover:bg-gray-300"
+                    className="px-2 py-1 rounded card btn"
                     title="Move down"
                   >↓</button>
                   <button
                     type="button"
                     onClick={() => removeCategory(idx)}
-                    className="px-2 py-1 rounded bg-red-500 text-white hover:bg-red-600"
+                    className="px-2 py-1 rounded bg-red-500 text-white hover:bg-red-600 btn"
                     title="Remove"
                   >✕</button>
                 </div>
@@ -438,7 +437,7 @@ export default function SettingsPage() {
                 type="number"
                 step="0.25"
                 min={0}
-                className="border rounded px-3 py-2 w-40"
+                className="border rounded px-3 py-2 w-40 card"
                 value={settings.waterGoalL}
                 onChange={(e) =>
                   setSettings(s => ({ ...s, waterGoalL: Math.max(0, Number(e.target.value || 0)) }))
@@ -458,7 +457,7 @@ export default function SettingsPage() {
                 type="number"
                 step="0.5"
                 min={0.5}
-                className="border rounded px-3 py-2 w-32"
+                className="border rounded px-3 py-2 w-32 card"
                 value={settings.defaultPortionStep}
                 onChange={(e) =>
                   setSettings(s => ({ ...s, defaultPortionStep: Math.max(0.1, Number(e.target.value || 0.1)) }))
@@ -473,7 +472,7 @@ export default function SettingsPage() {
           <label className="flex flex-col">
             <span className="mb-1 text-sm font-medium">Theme</span>
             <select
-              className="border rounded px-3 py-2"
+              className="border rounded px-3 py-2 card"
               value={settings.theme}
               onChange={(e) => setSettings(s => ({ ...s, theme: e.target.value as Settings["theme"] }))}
             >
@@ -487,7 +486,7 @@ export default function SettingsPage() {
           <label className="flex flex-col">
             <span className="mb-1 text-sm font-medium">Language</span>
             <select
-              className="border rounded px-3 py-2"
+              className="border rounded px-3 py-2 card"
               value={settings.language}
               onChange={(e) => setSettings(s => ({ ...s, language: e.target.value as Settings["language"] }))}
             >

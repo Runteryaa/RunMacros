@@ -117,7 +117,7 @@ export default function RecipeGenerator() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded-2xl shadow">
+    <div className="max-w-3xl mx-auto p-6 card rounded-2xl shadow">
       <h2 className="text-2xl font-bold mb-4">Create Recipe</h2>
 
       {/* Basics */}
@@ -125,7 +125,7 @@ export default function RecipeGenerator() {
         <div className="flex flex-col">
           <label className="text-sm font-medium mb-1">Title</label>
           <input
-            className="border rounded px-3 py-2"
+            className="border rounded card px-3 py-2"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Classic Omelette"
@@ -134,7 +134,7 @@ export default function RecipeGenerator() {
         <div className="flex flex-col">
           <label className="text-sm font-medium mb-1">Image URL (optional)</label>
           <input
-            className="border rounded px-3 py-2"
+            className="border rounded px-3 py-2 card"
             value={image}
             onChange={(e) => setImage(e.target.value)}
             placeholder="https://…"
@@ -145,7 +145,7 @@ export default function RecipeGenerator() {
       <div className="flex flex-col mb-6">
         <label className="text-sm font-medium mb-1">Description</label>
         <textarea
-          className="border rounded px-3 py-2"
+          className="border rounded px-3 py-2 card"
           rows={3}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
@@ -156,8 +156,8 @@ export default function RecipeGenerator() {
       {/* Ingredients */}
       <h3 className="text-xl font-semibold mb-2">Ingredients</h3>
       <div className="overflow-x-auto">
-        <table className="w-full text-sm border mb-3">
-          <thead className="bg-gray-50">
+        <table className="w-full text-sm border mb-3 card">
+          <thead className="card">
             <tr>
               <th className="text-left px-2 py-2">Ingredient Name</th>
               <th className="text-left px-2 py-2">Amount</th>
@@ -170,10 +170,10 @@ export default function RecipeGenerator() {
           </thead>
           <tbody>
             {ingredients.map((ing, idx) => (
-              <tr key={idx} className="even:bg-gray-50">
+              <tr key={idx} className="card">
                 <td className="px-2 py-1">
                   <input
-                    className="border rounded px-2 py-1 w-full"
+                    className="border rounded px-2 py-1 w-full card"
                     value={ing.name}
                     onChange={(e) => updateIngredient(idx, "name", e.target.value)}
                     placeholder="Eggs"
@@ -181,7 +181,7 @@ export default function RecipeGenerator() {
                 </td>
                 <td className="px-2 py-1">
                   <input
-                    className="border rounded px-2 py-1 w-full"
+                    className="border rounded px-2 py-1 w-full card"
                     value={ing.amount}
                     onChange={(e) => updateIngredient(idx, "amount", e.target.value)}
                     placeholder="3 large"
@@ -190,7 +190,7 @@ export default function RecipeGenerator() {
                 <td className="px-2 py-1">
                   <input
                     type="number"
-                    className="border rounded px-2 py-1 w-24 text-center"
+                    className="border rounded px-2 py-1 w-24 text-center card"
                     value={String(ing.calories)}
                     onChange={(e) => updateIngredient(idx, "calories", e.target.value)}
                   />
@@ -198,7 +198,7 @@ export default function RecipeGenerator() {
                 <td className="px-2 py-1">
                   <input
                     type="number"
-                    className="border rounded px-2 py-1 w-20 text-center"
+                    className="border rounded px-2 py-1 w-20 text-center card"
                     value={String(ing.carbs)}
                     onChange={(e) => updateIngredient(idx, "carbs", e.target.value)}
                   />
@@ -206,7 +206,7 @@ export default function RecipeGenerator() {
                 <td className="px-2 py-1">
                   <input
                     type="number"
-                    className="border rounded px-2 py-1 w-20 text-center"
+                    className="border rounded px-2 py-1 w-20 text-center card"
                     value={String(ing.protein)}
                     onChange={(e) => updateIngredient(idx, "protein", e.target.value)}
                   />
@@ -214,7 +214,7 @@ export default function RecipeGenerator() {
                 <td className="px-2 py-1">
                   <input
                     type="number"
-                    className="border rounded px-2 py-1 w-20 text-center"
+                    className="border rounded px-2 py-1 w-20 text-center card"
                     value={String(ing.fat)}
                     onChange={(e) => updateIngredient(idx, "fat", e.target.value)}
                   />
@@ -222,7 +222,7 @@ export default function RecipeGenerator() {
                 <td className="px-2 py-1">
                   <button
                     type="button"
-                    className="text-red-600 hover:underline"
+                    className="text-red-600 hover:underline btn"
                     onClick={() => removeRow(idx)}
                   >
                     Remove
@@ -246,7 +246,7 @@ export default function RecipeGenerator() {
       <button
         type="button"
         onClick={addRow}
-        className="mb-6 inline-flex items-center rounded bg-gray-200 px-3 py-1 text-sm hover:bg-gray-300"
+        className="mb-6 inline-flex items-center rounded px-3 py-1 text-sm btn card"
       >
         + Add ingredient
       </button>
@@ -255,7 +255,7 @@ export default function RecipeGenerator() {
       <div className="flex flex-col mb-6">
         <label className="text-sm font-medium mb-1">Instructions (one per line)</label>
         <textarea
-          className="border rounded px-3 py-2"
+          className="border rounded px-3 py-2 card"
           rows={6}
           value={instructions}
           onChange={(e) => setInstructions(e.target.value)}

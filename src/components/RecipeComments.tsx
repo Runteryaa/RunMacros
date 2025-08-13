@@ -66,12 +66,12 @@ export default function RecipeComments({ recipeId }: { recipeId: string }) {
           <input
             value={text}
             onChange={e => setText(e.target.value)}
-            className="flex-1 border rounded px-3 py-2"
+            className="flex-1 border rounded px-3 py-2 card"
             placeholder="Leave a comment..."
             maxLength={300}
             required
           />
-          <button type="submit" className="bg-blue-600 text-white rounded px-4 py-2">Send</button>
+          <button type="submit" className="card btn text-white rounded px-4 py-2">Send</button>
         </form>
       ) : (
         <div className="mb-4 text-gray-500">Sign in to comment.</div>
@@ -83,7 +83,7 @@ export default function RecipeComments({ recipeId }: { recipeId: string }) {
       ) : (
         <ul className="space-y-4">
           {comments.map((c, idx) => (
-            <li key={idx} className="flex items-start gap-3 bg-gray-100 rounded-xl px-4 py-3">
+            <li key={idx} className="flex items-start gap-3 card rounded-xl px-4 py-3">
               <img
                 src={c.userPhoto || "https://ui-avatars.com/api/?name=" + encodeURIComponent(c.userName)}
                 alt={c.userName}

@@ -35,8 +35,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        < InlineThemeScript />
         < Head />
-        <InlineThemeScript />
       </head>
       <body className="flex min-h-screen">
         < ThemeClient />

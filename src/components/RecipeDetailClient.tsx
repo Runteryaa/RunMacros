@@ -50,7 +50,7 @@ export default function RecipeDetailClient({ recipeId }: { recipeId: string }) {
   const ingredientMacroTotal = recipe.ingredients ? sumMacros(recipe.ingredients) : null;
 
   return (
-    <div className="max-w-3xl mx-auto p-8 bg-white rounded-2xl shadow-lg mt-8">
+    <div className="max-w-3xl mx-auto p-8 card rounded-2xl shadow-lg mt-8">
       <img src={recipe.image} alt={recipe.title} className="w-full h-64 object-cover rounded-xl mb-6" />
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-3xl font-bold">{recipe.title}</h1>
@@ -58,14 +58,14 @@ export default function RecipeDetailClient({ recipeId }: { recipeId: string }) {
           {recipe.calories} kcal
         </span>
       </div>
-      <div className="flex gap-4 mb-6">
+      <div className="flex gap-4 mb-6 card">
         <span className="bg-blue-100 text-blue-600 px-2 py-1 rounded">Carbs: {recipe.macros.carbs}g</span>
         <span className="bg-yellow-100 text-yellow-600 px-2 py-1 rounded">Protein: {recipe.macros.protein}g</span>
         <span className="bg-pink-100 text-pink-600 px-2 py-1 rounded">Fat: {recipe.macros.fat}g</span>
       </div>
-      <p className="text-gray-700 mb-6">{recipe.description}</p>
+      <p className="text-gray-700  card mb-6">{recipe.description}</p>
       <h2 className="text-xl font-semibold mb-2">Ingredients & Macros</h2>
-      <table className="w-full text-sm mb-6">
+      <table className="w-full text-sm mb-6 card">
         <thead>
           <tr>
             <th className="text-left">Ingredient</th>
@@ -99,7 +99,7 @@ export default function RecipeDetailClient({ recipeId }: { recipeId: string }) {
         </tbody>
       </table>
       <h2 className="text-xl font-semibold mb-2">Instructions</h2>
-      <ol className="list-decimal ml-8">
+      <ol className="list-decimal ml-8 card">
         {recipe.instructions.map((step, idx) => <li key={idx} className="mb-2">{step}</li>)}
       </ol>
       <RecipeComments recipeId={recipeId} />
