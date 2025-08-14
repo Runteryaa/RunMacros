@@ -1,89 +1,135 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { getAuth, onAuthStateChanged, User } from "firebase/auth";
-import { getDatabase, onValue, ref } from "firebase/database";
+import { getDatabase, ref, onValue, off } from "firebase/database";
 import { app } from "@/lib/firebase";
 
-type Recipe = {
-  title: string;
-  servings: number;
-  diet?: string;
-  nutritionPerServing?: {
-    calories?: number;
-    protein?: number;
+// Shape aligned to your DB: top-level calories, macros object with carbs/fat/protein
+type RecipeRecord = {
+  title?: string;
+  description?: string;
+  image?: string;
+  calories?: number; // <- exists in your DB
+  macros?: {
     carbs?: number;
     fat?: number;
+    protein?: number;
   };
-  createdAt?: number;
+  ingredients?: Array<{
+    name?: string;
+    amount?: string;
+    calories?: number;
+    carbs?: number;
+    protein?: number;
+    fat?: number;
+  }>;
+  instructions?: string[];
+  comments?: Record<string, unknown>;
 };
 
-export default function RecipeList() {
-  const [user, setUser] = useState<User | null>(null);
-  const [recipes, setRecipes] = useState<{ id: string; data: Recipe }[]>([]);
+type RecipeListItem = { id: string; data: RecipeRecord };
+
+export default function RecipesList() {
+  const [items, setItems] = useState<RecipeListItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const auth = getAuth(app);
-    return onAuthStateChanged(auth, (u) => setUser(u));
+    const db = getDatabase(app);
+    const recipesRef = ref(db, "recipes");
+
+    const unsub = onValue(
+      recipesRef,
+      (snap) => {
+        if (!snap.exists()) {
+          setItems([]);
+          setLoading(false);
+          return;
+        }
+        const val = snap.val() as Record<string, RecipeRecord>;
+        const arr: RecipeListItem[] = Object.entries(val).map(([id, data]) => ({ id, data }));
+        // newest first by key roughly; tweak if you store timestamps
+        arr.reverse();
+        setItems(arr);
+        setLoading(false);
+      },
+      () => setLoading(false)
+    );
+
+    return () => {
+      off(recipesRef, "value", unsub);
+    };
   }, []);
 
-  useEffect(() => {
-    if (!user) {
-      setRecipes([]);
-      setLoading(false);
-      return;
-    }
-    const db = getDatabase(app);
-    const r = ref(db, `/recipes`);
-    const unsub = onValue(r, (snap) => {
-      const val = snap.val() || {};
-      const list = Object.entries(val).map(([id, data]) => ({ id, data: data as Recipe }));
-      // newest first
-      list.sort((a, b) => (b.data.createdAt || 0) - (a.data.createdAt || 0));
-      setRecipes(list);
-      setLoading(false);
-      console.log(list)
-    });
-    return () => unsub();
-  }, [user]);
-
-
   if (loading) {
-    return <div className="text-gray-600">Loading recipes…</div>;
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {[...Array(6)].map((_, i) => (
+          <div key={i} className="p-4 bg-white rounded shadow animate-pulse">
+            <div className="h-40 bg-gray-200 rounded mb-3" />
+            <div className="h-4 bg-gray-200 rounded w-2/3 mb-2" />
+            <div className="h-3 bg-gray-100 rounded w-1/2" />
+          </div>
+        ))}
+      </div>
+    );
   }
 
-  if (recipes.length === 0) {
-    return <div className="text-gray-600">No recipes yet. Generate one to get started!</div>;
+  if (items.length === 0) {
+    return <div className="text-gray-600">No recipes yet.</div>;
   }
 
   return (
-    <div className="grid sm:grid-cols-2 gap-4">
-      {recipes.map(({ id, data }) => (
-        <Link
-          key={id}
-          href={`/recipes/${id}`}
-          className="block rounded-xl border bg-white hover:shadow transition p-4 card"
-        >
-          <div className="flex items-start justify-between gap-3">
-            <h3 className="font-semibold text-lg">{data.title || "Untitled Recipe"}</h3>
-            <span className="text-xs px-2 py-0.5 rounded-full ">
-              {data?.calories || "none"}
-            </span>
-          </div>
-          <div className="text-sm text-gray-600 mt-1">
-            Macros: {data?.macros?.carbs || "x"}C, {data?.macros?.protein || "x"}P, {data?.macros?.fat || "x"}F
-          </div>
-          {data.nutritionPerServing && (
-            <div className="mt-2 text-xs text-gray-700 grid grid-cols-4 gap-2">
-              <div><b>{data.nutritionPerServing.calories ?? 0}</b> kcal</div>
-              <div><b>{data.nutritionPerServing.protein ?? 0}</b> P</div>
-              <div><b>{data.nutritionPerServing.carbs ?? 0}</b> C</div>
-              <div><b>{data.nutritionPerServing.fat ?? 0}</b> F</div>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      {items.map(({ id, data }) => {
+        const title = data?.title || "Untitled Recipe";
+        const img = data?.image || "/placeholder.png";
+
+        // Safely read numbers with fallbacks
+        const calories = Number(data?.calories ?? 0);
+
+        const carbs = Number(data?.macros?.carbs ?? 0);
+        const protein = Number(data?.macros?.protein ?? 0);
+        const fat = Number(data?.macros?.fat ?? 0);
+
+        return (
+          <Link
+            key={id}
+            href={`/recipes/${encodeURIComponent(id)}`}
+            className="block bg-white rounded-xl shadow hover:shadow-md transition overflow-hidden border"
+          >
+            <div className="w-full h-40 bg-gray-100">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={img}
+                alt={title}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
             </div>
-          )}
-        </Link>
-      ))}
+            <div className="p-4">
+              <div className="flex items-center justify-between">
+                <h3 className="font-semibold text-lg">{title}</h3>
+                <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
+                  {calories} kcal
+                </span>
+              </div>
+
+              {/* Don’t render the macros object directly—render text */}
+              <div className="text-sm text-gray-700 mt-2">
+                Macros: <span className="font-medium">{protein}P</span>{" / "}
+                <span className="font-medium">{carbs}C</span>{" / "}
+                <span className="font-medium">{fat}F</span>
+              </div>
+
+              {data?.description && (
+                <p className="text-xs text-gray-500 mt-2 line-clamp-2">
+                  {data.description}
+                </p>
+              )}
+            </div>
+          </Link>
+        );
+      })}
     </div>
   );
 }
