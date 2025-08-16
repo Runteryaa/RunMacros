@@ -106,7 +106,7 @@ export default function MealsPage() {
   if (!user) return <div className="p-8">Please log in</div>;
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded shadow mt-6">
+    <div className="max-w-3xl mx-auto p-6 card rounded shadow mt-6">
       <h1 className="text-2xl font-bold mb-6">Today’s Meals ({todayStr()})</h1>
 
       {/* Add food form */}
@@ -116,7 +116,7 @@ export default function MealsPage() {
     <select
       value={category}
       onChange={(e) => setCategory(e.target.value)}
-      className="border rounded px-3 py-2"
+      className="border card rounded px-3 py-2"
     >
       {categories.map((c) => (
         <option key={c} value={c}>{c}</option>
@@ -130,7 +130,7 @@ export default function MealsPage() {
       type="text"
       value={foodName}
       onChange={(e) => setFoodName(e.target.value)}
-      className="border rounded px-3 py-2"
+      className="border rounded card px-3 py-2"
       required
     />
   </div>
@@ -141,7 +141,7 @@ export default function MealsPage() {
       type="number"
       value={macros.calories}
       onChange={(e) => setMacros(m => ({ ...m, calories: Number(e.target.value) }))}
-      className="border rounded px-3 py-2"
+      className="border rounded card px-3 py-2"
       required
     />
   </div>
@@ -152,7 +152,7 @@ export default function MealsPage() {
       type="number"
       value={macros.protein}
       onChange={(e) => setMacros(m => ({ ...m, protein: Number(e.target.value) }))}
-      className="border rounded px-3 py-2"
+      className="border rounded card px-3 py-2"
       required
     />
   </div>
@@ -163,7 +163,7 @@ export default function MealsPage() {
       type="number"
       value={macros.carbs}
       onChange={(e) => setMacros(m => ({ ...m, carbs: Number(e.target.value) }))}
-      className="border rounded px-3 py-2"
+      className="border rounded card px-3 py-2"
       required
     />
   </div>
@@ -174,7 +174,7 @@ export default function MealsPage() {
       type="number"
       value={macros.fat}
       onChange={(e) => setMacros(m => ({ ...m, fat: Number(e.target.value) }))}
-      className="border rounded px-3 py-2"
+      className="border rounded card px-3 py-2"
       required
     />
   </div>
@@ -185,14 +185,14 @@ export default function MealsPage() {
       type="number"
       value={portion}
       onChange={(e) => setPortion(e.target.value)}
-      className="border rounded px-3 py-2"
+      className="border rounded card px-3 py-2"
     />
   </div>
 
   <div className="flex flex-col justify-end">
     <button
       type="submit"
-      className="bg-green-600 text-white px-4 py-2 rounded"
+      className="bg-green-600 btn text-white px-4 py-2 rounded"
     >
       Add
     </button>
@@ -211,9 +211,9 @@ export default function MealsPage() {
               {Object.entries(meals).map(([cat, foods]) => (
                 <div key={cat} className="mb-6">
                   <h2 className="font-semibold mb-2">{cat} — kcal: {groupedTotals[cat].calories}</h2>
-                  <table className="w-full text-sm border">
+                  <table className="w-full text-sm card">
                     <thead>
-                      <tr className="bg-gray-100">
+                      <tr className="card">
                         <th className="text-left px-2 py-1">Food</th>
                         <th>Calories</th>
                         <th>Protein</th>

@@ -95,9 +95,9 @@ export default function RecipesList() {
           <Link
             key={id}
             href={`/recipes/${encodeURIComponent(id)}`}
-            className="block bg-white rounded-xl shadow hover:shadow-md transition overflow-hidden border"
+            className="block card rounded-xl shadow hover:shadow-md transition overflow-hidden border"
           >
-            <div className="w-full h-40 bg-gray-100">
+            <div className="w-full h-40 card">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={img}
@@ -115,7 +115,7 @@ export default function RecipesList() {
               </div>
 
               {/* Don’t render the macros object directly—render text */}
-              <div className="text-sm text-gray-700 mt-2">
+              <div className="text-sm mt-2">
                 Macros: <span className="font-medium">{protein}P</span>{" / "}
                 <span className="font-medium">{carbs}C</span>{" / "}
                 <span className="font-medium">{fat}F</span>

@@ -491,7 +491,7 @@ export default function SettingsPage() {
               onChange={(e) => setSettings(s => ({ ...s, language: e.target.value as Settings["language"] }))}
             >
               <option value="en">English</option>
-              <option value="tr">Türkçe</option>
+              <option value="tr">Not implemented yet</option>
             </select>
           </label>
         </div>
