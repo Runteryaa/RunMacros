@@ -85,11 +85,11 @@ export default function RecipesList() {
         const img = data?.image || "/placeholder.png";
 
         // Safely read numbers with fallbacks
-        const calories = Number(data?.calories ?? 0);
+        const calories = String(data?.calories ?? "x");
 
-        const carbs = Number(data?.macros?.carbs ?? 0);
-        const protein = Number(data?.macros?.protein ?? 0);
-        const fat = Number(data?.macros?.fat ?? 0);
+        const carbs = String(data?.macros?.carbs ?? "x");
+        const protein = String(data?.macros?.protein ?? "x");
+        const fat = String(data?.macros?.fat ?? "x");
 
         return (
           <Link
@@ -116,9 +116,9 @@ export default function RecipesList() {
 
               {/* Don’t render the macros object directly—render text */}
               <div className="text-sm mt-2">
-                Macros: <span className="font-medium">{protein}P</span>{" / "}
-                <span className="font-medium">{carbs}C</span>{" / "}
-                <span className="font-medium">{fat}F</span>
+                Macros: <span className="font-medium">P{protein}</span>{" / "}
+                <span className="font-medium">C{carbs}</span>{" / "}
+                <span className="font-medium">F{fat}</span>
               </div>
 
               {data?.description && (

@@ -20,7 +20,7 @@ type Recipe = {
   description?: string;
   image?: string;
   calories?: number;
-  macros?: { carbs?: number; protein?: number; fat?: number };
+  macros?: { carbs?: string[]; protein?: string[]; fat?: string[] };
   ingredients?: Ingredient[];
   instructions?: string[];
   // allow extra fields
@@ -66,7 +66,7 @@ async function rtdbRestGet<T>(path: string): Promise<T | null> {
 /** safe number helper */
 function n(v: any, d = 0) {
   const x = Number(v);
-  return Number.isFinite(x) ? x : d;
+  return Number.isFinite(x) ? x : "x";
 }
 
 export default function RecipeDetailClient({ recipeId }: { recipeId: string }) {
@@ -106,7 +106,7 @@ export default function RecipeDetailClient({ recipeId }: { recipeId: string }) {
   }, [recipeId]);
 
   const safeMacros = {
-    carbs: n(recipe?.macros?.carbs),
+    carbs: n(recipe?.macros?.carbs || "x"),
     protein: n(recipe?.macros?.protein),
     fat: n(recipe?.macros?.fat),
   };
@@ -114,7 +114,7 @@ export default function RecipeDetailClient({ recipeId }: { recipeId: string }) {
   const hasIngredients = Array.isArray(recipe?.ingredients) && recipe!.ingredients!.length > 0;
 
   const ingredientTotals = useMemo(() => {
-    if (!hasIngredients) return { calories: 0, carbs: 0, protein: 0, fat: 0 };
+    if (!hasIngredients) return { calories: "x", carbs: "x", protein: "x", fat: "x" };
     return (recipe!.ingredients as Ingredient[]).reduce(
       (acc, ing) => ({
         calories: acc.calories + n(ing.calories),
@@ -122,7 +122,7 @@ export default function RecipeDetailClient({ recipeId }: { recipeId: string }) {
         protein: acc.protein + n(ing.protein),
         fat: acc.fat + n(ing.fat),
       }),
-      { calories: 0, carbs: 0, protein: 0, fat: 0 }
+      { calories: "x", carbs: "x", protein: "x", fat: "x" }
     );
   }, [hasIngredients, recipe]);
 
@@ -136,7 +136,7 @@ export default function RecipeDetailClient({ recipeId }: { recipeId: string }) {
   const instructions: string[] = Array.isArray(recipe.instructions) ? recipe.instructions : [];
 
   return (
-    <div className="max-w-3xl mx-auto p-8 bg-white rounded-2xl shadow-lg mt-8">
+    <div className="max-w-3xl mx-auto p-8 card rounded-2xl shadow-lg mt-8">
       <img
         src={img}
         alt={title}
@@ -152,9 +152,9 @@ export default function RecipeDetailClient({ recipeId }: { recipeId: string }) {
       </div>
 
       <div className="flex gap-2 flex-wrap mb-6">
-        <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded">Carbs: {safeMacros.carbs}g</span>
-        <span className="bg-yellow-100 text-yellow-700 px-2 py-1 rounded">Protein: {safeMacros.protein}g</span>
-        <span className="bg-pink-100 text-pink-700 px-2 py-1 rounded">Fat: {safeMacros.fat}g</span>
+        <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded">Carbs: {safeMacros.carbs}</span>
+        <span className="bg-yellow-100 text-yellow-700 px-2 py-1 rounded">Protein: {safeMacros.protein}</span>
+        <span className="bg-pink-100 text-pink-700 px-2 py-1 rounded">Fat: {safeMacros.fat}</span>
       </div>
 
       {description && <p className="text-gray-700 mb-6">{description}</p>}
@@ -162,7 +162,7 @@ export default function RecipeDetailClient({ recipeId }: { recipeId: string }) {
       {hasIngredients && (
         <>
           <h2 className="text-xl font-semibold mb-2">Ingredients & Macros</h2>
-          <table className="w-full text-sm mb-6">
+          <table className="w-full card text-sm mb-6">
             <thead>
               <tr>
                 <th className="text-left">Ingredient</th>
@@ -175,7 +175,7 @@ export default function RecipeDetailClient({ recipeId }: { recipeId: string }) {
             </thead>
             <tbody>
               {recipe!.ingredients!.map((ing, idx) => (
-                <tr key={idx} className="even:bg-gray-50">
+                <tr key={idx} className="border-t">
                   <td>{ing.name}</td>
                   <td>{ing.amount}</td>
                   <td className="text-center">{n(ing.calories)}</td>

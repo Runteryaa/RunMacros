@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState, useCallback } from "react";
 import { PieChart, Pie, Cell } from "recharts";
 
 type Props = {
@@ -8,6 +9,24 @@ type Props = {
   color?: string;
   unit?: string;
 };
+
+function useThemeAttr(attr: string = "data-theme") {
+  const [value, setValue] = useState<string | null>(null);
+
+  useEffect(() => {
+    const html = document.documentElement;
+
+    const update = () => setValue(html.getAttribute(attr));
+    update(); // initial
+
+    const mo = new MutationObserver(() => update());
+    mo.observe(html, { attributes: true, attributeFilter: [attr] });
+    return () => mo.disconnect();
+  }, [attr]);
+
+  return value;
+}
+
 
 export default function MacroDonut({
   value,
@@ -20,7 +39,11 @@ export default function MacroDonut({
     { name: "Taken", value: Math.min(value, target) },
     { name: "Left", value: Math.max(target - value, 0) }
   ];
-  const MAIN_COLORS = [color, "#e5e7eb"];
+
+  const theme = useThemeAttr("data-theme");
+  const isDark = theme === "dark";
+  const theColor = isDark ? "#3c4963ff" : "#e5e7eb";
+  const MAIN_COLORS = [color, theColor];
 
   const overflowValue = value > target ? value - target : 0;
   const overflowData = [
@@ -76,7 +99,7 @@ export default function MacroDonut({
           dominantBaseline="central"
           fontSize={22}
           fontWeight={700}
-          fill="#111"
+          fill="#747474ff"
         >
           {value}
           {unit}

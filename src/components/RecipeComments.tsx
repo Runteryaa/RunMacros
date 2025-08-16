@@ -123,7 +123,7 @@ export default function RecipeComments({ recipeId }: { recipeId: string }) {
 
       <div className="flex gap-2">
         <input
-          className="border rounded px-3 py-2 flex-1"
+          className="border rounded card px-3 py-2 flex-1"
           placeholder="Write a comment…"
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -131,7 +131,7 @@ export default function RecipeComments({ recipeId }: { recipeId: string }) {
         <button
           onClick={send}
           disabled={sending}
-          className={`px-3 py-2 rounded text-white ${sending ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"}`}
+          className={`px-3 py-2 btn rounded text-white ${sending ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"}`}
         >
           {sending ? "Sending…" : "Send"}
         </button>

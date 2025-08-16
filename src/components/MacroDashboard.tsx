@@ -5,7 +5,25 @@ import { getDatabase, ref, get } from "firebase/database";
 import { app } from "@/lib/firebase";
 import MacroDonut from "@/components/MacroDonut";
 
-/* ---------- utils: robust local date helpers ---------- */
+/* ----------------------- Reusable theme hook ----------------------- */
+function useThemeAttr(attr: string = "data-theme") {
+  const [value, setValue] = useState<string | null>(null);
+
+  useEffect(() => {
+    const html = document.documentElement;
+
+    const update = () => setValue(html.getAttribute(attr));
+    update(); // initial
+
+    const mo = new MutationObserver(() => update());
+    mo.observe(html, { attributes: true, attributeFilter: [attr] });
+    return () => mo.disconnect();
+  }, [attr]);
+
+  return value;
+}
+
+/* ------------------ utils: robust local date helpers ------------------ */
 function toYMD(d: Date) {
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, "0");
@@ -34,7 +52,7 @@ function formatDateLabel(ymd: string) {
   });
 }
 
-/* ---------- Date bar ---------- */
+/* --------------------------- Date bar --------------------------- */
 function DateBar({
   date,
   onChangeDate,
@@ -50,7 +68,7 @@ function DateBar({
       <button
         type="button"
         onClick={() => onChangeDate(addDays(date, -1))}
-        className="px-3 py-2 rounded bg-gray-200 hover:bg-gray-300"
+        className="px-3 py-2 rounded bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600"
         aria-label="Previous day"
       >
         ◀
@@ -61,8 +79,10 @@ function DateBar({
       <button
         type="button"
         onClick={() => !isToday && onChangeDate(addDays(date, 1))}
-        className={`px-3 py-2 rounded bg-gray-200 ${
-          isToday ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-300"
+        className={`px-3 py-2 rounded bg-gray-200 dark:bg-gray-700 ${
+          isToday
+            ? "opacity-50 cursor-not-allowed"
+            : "hover:bg-gray-300 dark:hover:bg-gray-600"
         }`}
         aria-label="Next day"
         disabled={isToday}
@@ -73,20 +93,49 @@ function DateBar({
   );
 }
 
-/* ---------- macro config ---------- */
+/* ---------------------- macro config (dual palette) ---------------------- */
 const MACROS = [
-  { key: "calories", label: "Calories", color: "#2563eb", unit: "" },
-  { key: "carbs", label: "Carbs", color: "#f472b6", unit: "g" },
-  { key: "protein", label: "Protein", color: "#22d3ee", unit: "g" },
-  { key: "fat", label: "Fat", color: "#facc15", unit: "g" },
+  {
+    key: "calories",
+    label: "Calories",
+    light: "#2563eb", // blue-600
+    dark: "#377accff",  // blue-400
+    unit: "kcal",
+  },
+  {
+    key: "carbs",
+    label: "Carbs",
+    dark: "#f472b6", // pink-400
+    light: "#f9a8d4",  // pink-300
+    unit: "g",
+  },
+  {
+    key: "protein",
+    label: "Protein",
+    dark: "#22d3ee", // cyan-400
+    light: "#67e8f9",  // cyan-300
+    unit: "g",
+  },
+  {
+    key: "fat",
+    label: "Fat",
+    dark: "#facc15", // yellow-400
+    light: "#fde047",  // yellow-300
+    unit: "g",
+  },
 ] as const;
 
 type Totals = { calories: number; carbs: number; protein: number; fat: number };
 
 export default function MacroDashboard() {
   const [date, setDate] = useState<string>(toYMD(new Date()));
-  const [macroData, setMacroData] = useState<Record<string, { value: number; target: number }> | null>(null);
+  const [macroData, setMacroData] =
+    useState<Record<string, { value: number; target: number }> | null>(null);
   const [loading, setLoading] = useState(true);
+
+  // watch <html data-theme="...">
+  const theme = useThemeAttr("data-theme");
+  const isDark = theme === "dark";
 
   const loadForDate = useCallback(async (uid: string, ymd: string) => {
     const db = getDatabase(app);
@@ -163,13 +212,13 @@ export default function MacroDashboard() {
     <div className="w-full">
       <DateBar date={date} onChangeDate={setDate} />
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full justify-items-center">
-        {MACROS.map(({ key, label, color, unit }) => (
+        {MACROS.map(({ key, label, light, dark, unit }) => (
           <MacroDonut
             key={key}
             value={(macroData as any)[key].value}
             target={(macroData as any)[key].target}
             label={label}
-            color={color}
+            color={isDark ? dark : light}
             unit={unit}
           />
         ))}
